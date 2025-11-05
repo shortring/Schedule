@@ -27,7 +27,8 @@ public class ScheduleService {
         Schedule schedule = new Schedule(
                 request.getTitle(),
                 request.getContent(),
-                request.getName()
+                request.getName(),
+                request.getPassword()
         );
         Schedule savedSchedule = scheduleRepository.save(schedule);
 

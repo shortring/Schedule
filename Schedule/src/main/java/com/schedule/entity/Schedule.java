@@ -1,15 +1,9 @@
 package com.schedule.entity;
 
-import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -27,12 +21,15 @@ public class Schedule extends BaseTimeEntity {
     private String content;
     @Column(length = 50, nullable = false)
     private String name;
+    @Column(length = 50, nullable = false)
+    private String password;
 
     // 생성자
-    public Schedule(String title, String content, String name) {
+    public Schedule(String title, String content, String name, String password) {
         this.title = title;
         this.content = content;
         this.name = name;
+        this.password = password;
     }
 
     // 기능
