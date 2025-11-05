@@ -2,6 +2,7 @@ package com.schedule.service;
 
 import com.schedule.dto.CreateScheduleRequest;
 import com.schedule.dto.CreateScheduleResponse;
+import com.schedule.dto.GetScheduleResponse;
 import com.schedule.entity.Schedule;
 import com.schedule.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Getter
@@ -16,8 +18,6 @@ import java.time.LocalDateTime;
 public class ScheduleService {
     // 속성
     private final ScheduleRepository scheduleRepository;
-    private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
 
     // 생성자
 
@@ -39,6 +39,21 @@ public class ScheduleService {
                 savedSchedule.getName(),
                 savedSchedule.getCreatedAt(),
                 savedSchedule.getModifiedAt()
+        );
+    }
+
+    @Transactional
+    public GetScheduleResponse findOne(long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(
+                () -> new IllegalStateException("없는 영화입니다.")
+        );
+        return new GetScheduleResponse(
+                schedule.getId(),
+                schedule.getTitle(),
+                schedule.getContent(),
+                schedule.getName(),
+                schedule.getCreatedAt(),
+                schedule.getModifiedAt()
         );
     }
 }
