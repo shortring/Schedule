@@ -9,7 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,5 +56,30 @@ public class ScheduleService {
                 schedule.getCreatedAt(),
                 schedule.getModifiedAt()
         );
+    }
+
+    @Transactional
+    public List<GetScheduleResponse> findAllByName(String name) {
+        List<Schedule> scheduleList;
+        if(name.isEmpty()) {
+            scheduleList = scheduleRepository.findAll();
+        }else {
+            scheduleList = scheduleRepository.findAllByName(name);
+        }
+        List<GetScheduleResponse> dtoList = new ArrayList<>();
+
+        for (Schedule schedule : scheduleList) {
+            GetScheduleResponse dto = new GetScheduleResponse(
+                    schedule.getId(),
+                    schedule.getTitle(),
+                    schedule.getContent(),
+                    schedule.getName(),
+                    schedule.getCreatedAt(),
+                    schedule.getModifiedAt()
+            );
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 }

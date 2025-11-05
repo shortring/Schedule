@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class ScheduleController {
@@ -29,7 +31,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules")
-    public ResponseEntity<GetScheduleResponse> getSchedules() {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAll());
+    public ResponseEntity<List<GetScheduleResponse>> getScheduleList(@RequestParam("scheduleName") String scheduleName) {
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.findAllByName(scheduleName));
     }
 }
