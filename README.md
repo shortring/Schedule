@@ -16,6 +16,90 @@ LV3
 LV4
 : 일정 삭제 기능 구현 (비밀번호를 검사하여 수정 여부를 결정할 수 있도록 작업)(필수 구현 기능)
 
+API 명세서
+- API 개요
+일정 생성 (Create)
+메서드 : POST
+url : http://localhost:8080/schedules
+request :{
+    "title": "제목",
+    "content":"내용",
+    "name": "이름",
+    "password": "비밀번호"
+}
+response :{
+  "id": 아이디,
+  "title": "제목",
+  "content": "내용",
+  "name": "이름",
+  "createdAt": "생성일",
+  "modifiedAt": "수정일"
+}
+
+일정 조회 (Read)
+단 건 조회
+메서드 : Get
+url : http://localhost:8080/schedules/{scheduleId}
+response :{
+  "id": 아이디,
+  "title": "제목",
+  "content": "내용",
+  "name": "이름",
+  "createdAt": "생성일",
+  "modifiedAt": "수정일"
+}
+다 건 조회
+메서드 : Get
+url : http://localhost:8080/schedules?name=이름
+response :{
+  "id": 아이디,
+  "title": "제목",
+  "content": "내용",
+  "name": "이름",
+  "createdAt": "생성일",
+  "modifiedAt": "수정일"
+}
+
+일정 수정 (Update)
+메서드 : Put
+url : http://localhost:8080/schedules/{scheduleId}
+request :{
+    "title": "제목",
+    "name": "이름",
+    "password": "비밀번호"
+}
+response :{
+  "id": 아이디,
+  "title": "변경된 제목",
+  "content": "내용",
+  "name": "변경된 이름",
+  "createdAt": "생성일",
+  "modifiedAt": "수정일"
+}
+에러 발생시 
+{
+  "error": "비밀번호가 틀렸습니다."
+}
+
+일정 삭제 (Delete)
+메서드 : Delete
+url : http://localhost:8080/schedules
+request :{
+    "id": 아이디,
+    "password": "비밀번호"
+}
+에러 발생시 
+{
+  "error": "비밀번호가 틀렸습니다."
+}
+
+
+ERD
+<img width="359" height="210" alt="image" src="https://github.com/user-attachments/assets/5fcdfb00-4ff6-427c-a9f0-a63673d2e1bf" />
+
+
+
+
 
 트러블 슈팅 및 해당 과제를 수행하며 공부한 것들을 작성한 TIL블로그 링크
 https://blog.naver.com/shortring/224064760828
