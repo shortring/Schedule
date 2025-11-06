@@ -32,6 +32,11 @@ public class Schedule extends BaseTimeEntity {
         this.password = password;
     }
 
+    public void updateSchedule(String title, String name) {
+        this.title = title;
+        this.name = name;
+    }
+
     // 기능
 
 }
